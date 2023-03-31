@@ -41,14 +41,14 @@
     }
 
     public function SetZakatProfesi(){
-        $gajiKotor = $this->getGajiKotor();
+        $gajiKotor = $this->setGajiKotor();
         if($this->agama == 'Islam' && $gajiKotor >= 6000000){
             $zakat = 0.025 * $this->setGajiPokok();
         }
         return $zakat;
     }
 
-    public function getGajiKotor(){
+    public function setGajiKotor(){
         $gajiPokok = $this->setGajiPokok();
         $tunjanganJabatan = $this->SetTunjab();
         $tunjanganKeluarga = $this->SetTunkel();
@@ -60,8 +60,9 @@
         $gajiPokok = $this->setGajiPokok();
         $tunjanganJabatan = $this->SetTunjab();
         $tunjanganKeluarga = $this->SetTunkel();
+        $gajiKotor = $this->setGajiKotor();
         $zakat = $this->SetZakatProfesi();
-        $gajiBersih = $gajiPokok + $tunjanganJabatan;
+        $gajiBersih = $gajiKotor - $zakat;
 
         echo 'NIP Pegawai: '. $this -> nip;
         echo '<br> Nama Pegawai: '. $this -> nama;
