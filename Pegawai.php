@@ -28,19 +28,19 @@
         return $gapok;
     }
 
-    public function getTunjanganJabatan(){
+    public function SetTunjab(){
         $gajiPokok = $this->setGajiPokok();
         $tunjanganJabatan = 0.2 * $gajiPokok;
         return $tunjanganJabatan;
     }
 
-    public function getTunjanganKeluarga(){
+    public function SetTunkel(){
         $gajiPokok = $this->setGajiPokok();
         $tunjanganKeluarga = ($this->status == 'Menikah') ? 0.1 * $gajiPokok : 0;
         return $tunjanganKeluarga;
     }
 
-    public function zakat(){
+    public function SetZakatProfesi(){
         $gajiKotor = $this->getGajiKotor();
         if($this->agama == 'Islam' && $gajiKotor >= 6000000){
             $zakat = 0.025 * $this->setGajiPokok();
@@ -50,17 +50,17 @@
 
     public function getGajiKotor(){
         $gajiPokok = $this->setGajiPokok();
-        $tunjanganJabatan = $this->getTunjanganJabatan();
-        $tunjanganKeluarga = $this->getTunjanganKeluarga();
+        $tunjanganJabatan = $this->SetTunjab();
+        $tunjanganKeluarga = $this->SetTunkel();
         $gajiKotor = $gajiPokok + $tunjanganJabatan + $tunjanganKeluarga;
         return $gajiKotor;
     }
 
     public function cetak(){
         $gajiPokok = $this->setGajiPokok();
-        $tunjanganJabatan = $this->getTunjanganJabatan();
-        $tunjanganKeluarga = $this->getTunjanganKeluarga();
-        $zakat = $this->zakat();
+        $tunjanganJabatan = $this->SetTunjab();
+        $tunjanganKeluarga = $this->SetTunkel();
+        $zakat = $this->SetZakatProfesi();
         $gajiBersih = $gajiPokok + $tunjanganJabatan;
 
         echo 'NIP Pegawai: '. $this -> nip;
